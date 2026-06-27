@@ -3,6 +3,7 @@
 Surveillez les ressources de votre PC (CPU, RAM, réseau, température) sur un écran Waveshare RP2350-LCD-1.47-B.
 
 ![status](https://img.shields.io/badge/status-fonctionnel-brightgreen)
+![version](https://img.shields.io/badge/version-1.1-blue)
 
 ## Matériel
 
@@ -16,6 +17,18 @@ Surveillez les ressources de votre PC (CPU, RAM, réseau, température) sur un �
 - Nombre de processus actifs
 - Débit réseau montant/descendant (Ko/s)
 - Horodatage
+- Inversion d'affichage (`FLIPPED = True` / `False` dans `main.py`)
+- Texte agrandi (2× pour une meilleure lisibilité)
+- Reconnexion automatique si le Pico est débranché
+
+## Orientation
+
+Inverser l'écran en éditant `main.py` :
+
+```python
+FLIPPED = True   # rotation 180°
+FLIPPED = False  # orientation normale
+```
 
 ## Fichiers
 
@@ -62,7 +75,7 @@ python pc_monitor.py
 `pc_monitor.py` interroge `psutil` toutes les 0,5 s et envoie une ligne JSON sur le port série USB :
 
 ```json
-{"time":"14:32:01","cpu":"23%","temp":"45.0°C","ram":"67%","proc":312,"up":"0.5K","down":"1.2K"}
+{"time":"14:32:01","cpu":"23%","temp":"45.0C","ram":"67%","proc":312,"up":"0.5K","down":"1.2K"}
 ```
 
 `main.py` parse le JSON et l'affiche sur l'écran via `framebuf`.

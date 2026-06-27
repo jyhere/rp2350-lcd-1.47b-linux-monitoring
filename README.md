@@ -3,6 +3,7 @@
 Monitor PC resource usage (CPU, RAM, network, temps) on a Waveshare RP2350-LCD-1.47-B display.
 
 ![demo](https://img.shields.io/badge/status-working-brightgreen)
+![version](https://img.shields.io/badge/version-1.1-blue)
 
 ## Hardware
 
@@ -16,6 +17,18 @@ Monitor PC resource usage (CPU, RAM, network, temps) on a Waveshare RP2350-LCD-1
 - Active process count
 - Network upload/download speed (KB/s)
 - Timestamp
+- Display orientation flip (`FLIPPED = True` / `False` in `main.py`)
+- Scaled text (2× larger for better readability)
+- Auto-reconnect on Pico disconnection
+
+## Orientation
+
+Flip the display 180° by editing `main.py`:
+
+```python
+FLIPPED = True   # rotation 180°
+FLIPPED = False  # orientation par défaut
+```
 
 ## Files
 
@@ -62,7 +75,7 @@ python pc_monitor.py
 `pc_monitor.py` polls `psutil` every 0.5 s and sends a JSON line over USB serial:
 
 ```json
-{"time":"14:32:01","cpu":"23%","temp":"45.0°C","ram":"67%","proc":312,"up":"0.5K","down":"1.2K"}
+{"time":"14:32:01","cpu":"23%","temp":"45.0C","ram":"67%","proc":312,"up":"0.5K","down":"1.2K"}
 ```
 
 `main.py` parses the JSON and renders it on the LCD using `framebuf`.
